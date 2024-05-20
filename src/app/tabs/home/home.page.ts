@@ -6,6 +6,12 @@ import { UserService } from 'src/app/api/user/user.service';
 import { AuthService } from '../../auth/auth.service';
 
 
+interface Task {
+    name : string;
+    diff: number;
+    date: string;
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -16,7 +22,25 @@ export class HomePage {
   @ViewChild('allAchievementsPie') allAchievementsPie;
   @ViewChildren('pr_chart', { read: ElementRef }) chartElementRefs: QueryList<ElementRef>;
 
+
   title = 'ホーム';
+  tasks: Task[] = [
+    {
+      name: "タスクα",
+      diff: this.calcDiffDate(2024, 4, 1),
+      date: new Date(2024, 4, 1).toLocaleDateString(),
+    },
+    {
+      name: "タスクβ",
+      diff: this.calcDiffDate(2024, 4, 12),
+      date: new Date(2024, 4, 12).toLocaleDateString(),
+    },
+    {
+      name: "タスクΩ",
+      diff: this.calcDiffDate(2024, 4, 16),
+      date: new Date(2024, 4, 16).toLocaleDateString(),
+    },
+  ];
 
   private uid: string;
   private users;
@@ -48,5 +72,13 @@ export class HomePage {
       });
       await modal.present();
     });
+  }
+
+  private calcDiffDate(year: number, month: number, day: number): number {
+    const now = new Date();
+    const targetDate = new Date(year, month + 1, day);
+
+    const result = Math.ceil( (now.getTime() - targetDate.getTime() ) / (1000 * 60 * 60 * 24));
+    return Math.abs(result);
   }
 }

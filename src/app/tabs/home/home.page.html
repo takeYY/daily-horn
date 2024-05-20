@@ -5,11 +5,19 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card>
-    テストですよ！
+  <ion-card *ngFor="let task of tasks">
+    <ion-card-header>
+      <ion-card-title>{{ task.name }}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      {{ task.date }} days ago.
+    </ion-card-content>
   </ion-card>
 
   <ion-card *ngFor="let data of pieChart">
     <canvas #pr_chart></canvas>
   </ion-card>
+
+  <ion-datetime presentation="date"></ion-datetime>
 </ion-content>
