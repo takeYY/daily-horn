@@ -7,8 +7,6 @@
 - パッケージインストール
   ```bash
   yarn
-  # or
-  npm i
   ```
 - husky インストールと設定
   ```bash

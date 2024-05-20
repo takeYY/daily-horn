@@ -5,20 +5,19 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card>
-    <ion-grid>
-      <ion-row>
-        <ion-col col-6 col-md>
-          <div><canvas #radarChart></canvas></div>
-        </ion-col>
-        <ion-col col-6 col-md>
-          <div><canvas #allAchievementsPie></canvas></div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+  <ion-card *ngFor="let task of tasks">
+    <ion-card-header>
+      <ion-card-title>{{ task.name }}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      {{ task.date }} days ago.
+    </ion-card-content>
   </ion-card>
 
   <ion-card *ngFor="let data of pieChart">
     <canvas #pr_chart></canvas>
   </ion-card>
+
+  <ion-datetime presentation="date"></ion-datetime>
 </ion-content>
